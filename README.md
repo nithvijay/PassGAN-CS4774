@@ -1,3 +1,3 @@
 # gcp-gan
 
-This is a project to experiement with Google Cloud Platform as a tool to train GANs.
+This repo contains code and guides to use GPUs on Google Cloud Platform to train models.
