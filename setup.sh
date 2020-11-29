@@ -18,3 +18,5 @@ conda install -y pytorch torchvision torchaudio cudatoolkit=11.0 -c pytorch
 
 git config --global user.name "nithvijay"
 git config --global user.email "nithin2463@example.com"
+
+# $ jupyter lab --no-browser --port=8889

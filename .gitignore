@@ -4,6 +4,8 @@ service_account_key.json
 download.csv
 id_ed25519
 *.zip
+*.jpg
+data
 
 
 # Byte-compiled / optimized / DLL files
