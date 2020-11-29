@@ -1,6 +1,6 @@
 # PassGAN Implementation - CS4774 Final Project
 
-This is a project to experiment with Google Cloud Platform as a tool to train different ML algorithms. 
+Using Google Cloud Platform to implement PassGAN.
 
 
 ## Network Architecture Notes
