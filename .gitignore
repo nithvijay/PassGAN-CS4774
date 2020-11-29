@@ -1,3 +1,10 @@
+.vscode
+ML_env
+service_account_key.json
+download.csv
+id_ed25519
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
