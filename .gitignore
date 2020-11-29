@@ -3,6 +3,7 @@ ML_env
 service_account_key.json
 download.csv
 id_ed25519
+*.zip
 
 
 # Byte-compiled / optimized / DLL files
