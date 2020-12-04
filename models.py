@@ -1,7 +1,9 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import numpy as np
+
+from data import translate
+
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -70,3 +72,11 @@ class Discriminator(nn.Module):
         x = self.flatten(x)
         outputs = self.lin(x)
         return outputs
+
+def predict_many(netGs, inv_charmap, num_samples=5):
+    latent_noise = torch.randn(num_samples, 128).to(device=device)
+    return [translate(netG(latent_noise).argmax(dim=2), inv_charmap) for netG in netGs]
+
+def predict_one(netG, inv_charmap, num_samples):
+    latent_noise = torch.randn(num_samples, 128).to(device=device)
+    return translate(netG(latent_noise).argmax(dim=2), inv_charmap)
