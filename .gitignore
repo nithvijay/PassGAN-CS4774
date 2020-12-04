@@ -6,6 +6,7 @@ id_ed25519
 *.zip
 *.jpg
 Data
+*.pickle
 
 
 # Byte-compiled / optimized / DLL files
