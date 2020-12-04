@@ -58,8 +58,22 @@ def dump_txt_to_pickle(path, dataset_name, test_size=0.1):
     pickle.dump(charmap, open(f"Data/{dataset_name}_charmap.pickle", 'wb'))
     pickle.dump(inv_charmap, open(f"Data/{dataset_name}_inv_charmap.pickle", 'wb'))
 
-def load_data_from_pickle(dataset_name):
-    train_lines = pickle.load(open(f"Data/{dataset_name}_train.pickle", 'rb'))
+def load_data_from_pickle(dataset_name, train_data=True, test_data=False):
+    """
+    Return order: train_data, test_data, charmap, inv_charmap
+    """
+    return_values = []
+    if train_data:
+        train_lines = pickle.load(open(f"Data/{dataset_name}_train.pickle", 'rb'))
+        return_values.append(train_lines)
+    if test_data:
+        test_lines = pickle.load(open(f"Data/{dataset_name}_test.pickle", 'rb'))
+        return_values.append(test_lines)
+    
     charmap = pickle.load(open(f"Data/{dataset_name}_charmap.pickle", "rb"))
     inv_charmap = pickle.load(open(f"Data/{dataset_name}_inv_charmap.pickle", "rb"))
-    return train_lines, charmap, inv_charmap
+    
+    return_values.append(charmap)
+    return_values.append(inv_charmap)
+
+    return return_values
