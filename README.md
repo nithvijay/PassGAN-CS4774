@@ -10,8 +10,6 @@ Using Google Cloud Platform to implement PassGAN.
 
 [IWGAN Paper](https://arxiv.org/pdf/1704.00028.pdf)
 
-[Old PassGAN implementation in Tensorflow 1 and Python 2](https://github.com/brannondorsey/PassGAN)
-
 ## Data/Leaked Passwords
 [Leaked Passwords Repository](https://hashes.org/leaks.php) (Click checkmark to download)
 
