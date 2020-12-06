@@ -7,6 +7,7 @@ id_ed25519
 *.jpg
 Data
 *.pickle
+Predictions
 
 
 # Byte-compiled / optimized / DLL files
