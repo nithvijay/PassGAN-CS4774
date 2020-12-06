@@ -41,7 +41,7 @@ def split(lines, test_size = 0.1): #data is already shuffled
     test_lines = lines[0:split]
     return train_lines, test_lines
 
-def dataloader(lines, batch_size):
+def dataloader(lines, batch_size): #refactor into subclass of DataLoader and Dataset?
     while True:
         np.random.shuffle(lines)
         for i in range(len(lines) // batch_size):
