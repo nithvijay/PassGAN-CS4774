@@ -18,9 +18,9 @@ def main():
     args['adam_beta1'] = 0.5
     args['adam_beta2'] = 0.9
     args['iterations'] = 199000
-    args['continue_training'] = False
-    args['netG_checkpoint'] = None
-    args['netD_checkpoint'] = None
+    args['continue_training'] = True
+    args['netG_checkpoint'] = "Checkpoints/netG-10300012:39:32AM_12-05-20"
+    args['netD_checkpoint'] = "Checkpoints/netD-10300012:39:32AM_12-05-20"
 
     training_loop(train_lines, charmap, inv_charmap, dataloader, args)
 
