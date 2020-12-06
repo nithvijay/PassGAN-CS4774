@@ -8,6 +8,12 @@ id_ed25519
 Data
 *.pickle
 
+!Checkpoints/netG-15700002:13:04PM_12-05-20
+*12-04-20
+*12-05-20
+
+Predictions
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
