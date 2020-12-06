@@ -8,7 +8,6 @@ from models import Generator, Discriminator, device
 from data import translate
 
 def training_loop(lines, charmap, inv_charmap, dataloader, args):
-    # must be better way to do this
     lambda_ = args['lambda_']
     n_critic_iters_per_generator_iter = args['n_critic_iters_per_generator_iter']
     batch_size = args['batch_size']
@@ -20,8 +19,6 @@ def training_loop(lines, charmap, inv_charmap, dataloader, args):
     netG_checkpoint = args['netG_checkpoint']
     netD_checkpoint = args['netD_checkpoint']
 
-    # Start actual training loop
-
     netG = Generator(charmap).to(device=device)
     netD = Discriminator(charmap).to(device=device)
         
@@ -31,7 +28,7 @@ def training_loop(lines, charmap, inv_charmap, dataloader, args):
         netG.load_state_dict(torch.load(netG_checkpoint))
         netD.load_state_dict(torch.load(netD_checkpoint))
         start_iter = int(netG_checkpoint.split(":")[0].split("-")[-1][:-2])
-        for _ in range(start_iter): #look up better way to do this
+        for _ in range(start_iter):
             next(train)
             pass
         print(f"Model loaded, starting at {start_iter}...")
@@ -44,10 +41,10 @@ def training_loop(lines, charmap, inv_charmap, dataloader, args):
 
     # start actual training loop
     for iteration in range(start_iter, iterations + 1):
-        for p in netD.parameters():  # reset requires_grad
-            p.requires_grad = True  # they are set to False below in netG update
+        for p in netD.parameters():
+            p.requires_grad = True
             
-        for i in range(n_critic_iters_per_generator_iter):
+        for i in range(n_critic_iters_per_generator_iter): #discrim trains 10 times for gen's 1
             real_inputs_discrete = next(train)
             real_data = F.one_hot(real_inputs_discrete, num_classes=len(charmap)).float() #x
             latent_variable = torch.randn(batch_size, 128).to(device=device) #z
@@ -57,9 +54,9 @@ def training_loop(lines, charmap, inv_charmap, dataloader, args):
             
             interpolates = alpha * real_data + ((1 - alpha) * fake_data) #x_hat
             interpolates = interpolates.clone().detach().requires_grad_(True) #x_hat
-            disc_interpolates = netD(interpolates) #D_w(x_hat)
-            gradients = autograd.grad(outputs=disc_interpolates, inputs=interpolates, #grad D_w(x_hat)
-                            grad_outputs=torch.ones(disc_interpolates.size()).to(device=device),
+            discrim_interpolates = netD(interpolates) #D_w(x_hat)
+            gradients = autograd.grad(outputs=discrim_interpolates, inputs=interpolates, #grad D_w(x_hat)
+                            grad_outputs=torch.ones(discrim_interpolates.size()).to(device=device),
                             create_graph=True, retain_graph=True, only_inputs=True)[0] #doesn't populate grad attributes
             
             gradient_penalty = ((gradients.norm(2, dim=1) - 1) ** 2).mean() * lambda_

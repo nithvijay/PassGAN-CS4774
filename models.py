@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+import datetime
+
 from data import translate
 
 
@@ -80,3 +82,27 @@ def predict_many(netGs, inv_charmap, num_samples=5):
 def predict_one(netG, inv_charmap, num_samples):
     latent_noise = torch.randn(num_samples, 128).to(device=device)
     return translate(netG(latent_noise).argmax(dim=2), inv_charmap)
+
+def write_predictions(netG, inv_charmap, batches_per_file, num_files, batch_size=100000):
+    print(f"Generating {batch_size * batches_per_file * num_files} passwords...")
+    t_total = datetime.datetime.now()
+    for i in range(1, num_files+1):
+        t = datetime.datetime.now()
+        print(f"File {i}")
+        print("\tGenerating output...")
+        preds = []
+        for _ in range(batches_per_file):
+            preds.append(netG(torch.randn(batch_size, 128).to(device=device)).argmax(dim=2)) #max 100k fits in memory
+        list_of_preds = torch.stack(preds).reshape((-1, 10)).cpu().tolist()
+        del preds
+        print("\tTranslating output...")
+        translated_preds = translate(list_of_preds, inv_charmap)
+
+        del list_of_preds
+        print("\tWriting output...")
+        with open(f"Predictions/predfile_{i}_{batch_size*batches_per_file}.txt", 'w+') as f:
+            for pred in translated_preds:
+                f.write(pred + "\n")
+        print(f"\t{datetime.datetime.now() - t}")
+        del translated_preds
+    print(f"\tTotal: {datetime.datetime.now() - t_total}")

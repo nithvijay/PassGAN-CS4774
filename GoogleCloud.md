@@ -1,19 +1,15 @@
 # Google Cloud Platform Cheatsheet
 
 ## Setup 
-1. Make Google Cloud Platform account with credit card
+1. Make Google Cloud Platform account with credit card attached
 2. Install GCP SDK
 3. Create vm instance
    1. Install programs
    2. Create env and install python packages
-4. Set up ssh
-5. Create Cloud Storage bucket via the CLI or GUI
-6. Install google-cloud-storage python api and set up authentication
+4. Set up ssh/tunneling
 
 https://cloud.google.com/storage/docs/reference/libraries#cloud-console
-https://github.com/GoogleCloudPlatform/gcsfuse/
 https://cloud.google.com/compute/docs/instances/create-start-preemptible-instance?authuser=1#handle_preemption
-https://github.com/googleapis/python-storage
 https://pytorch.org/tutorials/recipes/recipes/saving_and_loading_a_general_checkpoint.html
 
 
