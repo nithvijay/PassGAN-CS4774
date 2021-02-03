@@ -9,7 +9,9 @@
 4. Set up ssh/tunneling
 
 https://cloud.google.com/storage/docs/reference/libraries#cloud-console
+
 https://cloud.google.com/compute/docs/instances/create-start-preemptible-instance?authuser=1#handle_preemption
+
 https://pytorch.org/tutorials/recipes/recipes/saving_and_loading_a_general_checkpoint.html
 
 
